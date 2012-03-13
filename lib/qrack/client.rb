@@ -20,7 +20,7 @@ module Qrack
     CONNECT_TIMEOUT = 5.0
     RETRY_DELAY     = 10.0
 
-    attr_reader   :status, :host, :vhost, :port, :logging, :spec, :heartbeat
+    attr_reader   :status, :host, :vhost, :port, :logging, :spec, :heartbeat, :last_method
     attr_accessor :channel, :logfile, :exchanges, :queues, :channels, :message_in, :message_out, :connecting
 
     # Temporary hack to make Bunny 0.7 work with port number in AMQP URL.
@@ -62,6 +62,7 @@ module Qrack
       create_logger if @logging
       @message_in = false
       @message_out = false
+      @last_method = nil
       @connecting = false
       @channels ||= []
       # Create channel 0

@@ -77,7 +77,7 @@ module Bunny
 
       method = client.next_method
 
-      client.check_response(method, Qrack::Protocol09::Basic::ConsumeOk, "Error subscribing to queue #{queue.name}")
+      client.check_response(method, Qrack::Protocol09::Basic::ConsumeOk, "Error subscribing to queue #{queue.name}, got #{method}")
 
       @consumer_tag = method.consumer_tag
     end

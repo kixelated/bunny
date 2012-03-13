@@ -340,12 +340,12 @@ the server will not send any more messages for that consumer.
       # Cancel consumer
       client.send_frame(Qrack::Protocol::Basic::Cancel.new(:consumer_tag => consumer_tag,:nowait => false))
 
+      # Reset subscription
+      @default_consumer = nil
+
       method = client.next_method
 
       client.check_response(method, Qrack::Protocol::Basic::CancelOk, "Error unsubscribing from queue #{name}")
-
-      # Reset subscription
-      @default_consumer = nil
 
       # Return confirmation
       :unsubscribe_ok
