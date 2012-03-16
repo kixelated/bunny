@@ -267,6 +267,14 @@ module Qrack
         end
       end
 
+      def read_ready?(timeout, cancellator)
+        if @data.is_a?(Qrack::Client)
+          @data.read_ready?(timeout, cancellator)
+        else
+          true
+        end
+      end
+
       def _read(size, pack = nil)
         if @data.is_a?(Qrack::Client)
           raw = @data.read(size)

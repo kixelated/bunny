@@ -168,6 +168,11 @@ module Qrack
       send_command(:write, *args)
     end
 
+    def read_ready?(timeout, cancelator = nil)
+      io = IO.select([ @socket, cancelator ].compact, nil, nil, timeout)
+      io and io[0].include?(@socket)
+    end
+
     private
 
     def close_socket(reason=nil)
